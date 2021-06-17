@@ -1,8 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');  
-
-$cyan: #6FB3B8;
-$blue: #BADFE7;
+@import "../../variables.scss";
 
 .container {
     width: 100%;
@@ -19,11 +15,11 @@ $blue: #BADFE7;
         font-family: 'Playfair Display', serif;
         font-size: 7vmax;
         color: $cyan;
-        animation: fadeIn ease 2s;
-        -webkit-animation: fadeIn ease 2s;
-        -moz-animation: fadeIn ease 2s;
-        -o-animation: fadeIn ease 2s;
-        -ms-animation: fadeIn ease 2s;
+        animation: fadeIn ease 3s;
+        -webkit-animation: fadeIn ease 3s;
+        -moz-animation: fadeIn ease 3s;
+        -o-animation: fadeIn ease 3s;
+        -ms-animation: fadeIn ease 3s;
     }
 
     @keyframes fadeIn {
@@ -40,22 +36,11 @@ $blue: #BADFE7;
         0% {opacity:0;}
         100% {opacity:1;}
       }
-      
-      @-o-keyframes fadeIn {
-        0% {opacity:0;}
-        100% {opacity:1;}
-      }
-      
-      @-ms-keyframes fadeIn {
-        0% {opacity:0;}
-        100% {opacity:1;}
-      }
 
       h2 {
-        font-family: 'Lato', sans-serif;
         font-size: 2vmax;
         color: $blue;
-        animation: blinker 1.4s linear infinite;
+        animation: blinker 1.5s linear infinite;
 
         @keyframes blinker {
             50% {
@@ -67,7 +52,8 @@ $blue: #BADFE7;
 
 /*
  * SHAPE STYLING BELOW
-*/
+ */
+ 
 $shape-count: 50;
 $sway-type: "sway-left-to-right", "sway-right-to-left";
 
@@ -86,7 +72,6 @@ $sway-type: "sway-left-to-right", "sway-right-to-left";
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    background-color: #F8F8F8;
     cursor: pointer;
 }
 
@@ -97,7 +82,7 @@ $sway-type: "sway-left-to-right", "sway-right-to-left";
     display: block;
     width: var(--shape-radius);
     height: calc(var(--shape-radius) * 1.4);
-    border-radius: 1em;
+    border-radius: 0.8em;
     animation: float-up var(--shape-float-duration) var(--shape-float-delay) ease-in infinite;
 
     &::before {
@@ -115,7 +100,7 @@ $sway-type: "sway-left-to-right", "sway-right-to-left";
     @for $i from 0 through $shape-count {
         &:nth-child(#{$i}) {
         --shape-left-offset: #{random_range(0vw, 100vw)};
-        --shape-radius: #{random_range(1vw, 6vw)};
+        --shape-radius: #{random_range(3vw, 6vw)};
         --shape-float-duration: #{random_range(6s, 12s)};
         --shape-sway-duration: #{random_range(4s, 6s)};
         --shape-float-delay: #{random_range(0s, 3s)};

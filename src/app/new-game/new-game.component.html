@@ -1,1 +1,92 @@
-<p>new-game works!</p>
+<div class="wrapper">
+    <h1>New Game</h1>
+    <mat-divider></mat-divider>
+
+    <!--
+        STEP 1 : SELECT PLAYERS
+     -->
+    <mat-card>
+        <div class="row">
+            <div class="col">
+                <h2>Select your players</h2>
+            </div>
+            <div class="col">
+                <button mat-icon-button aria-label="Edit players list" class="icon" style="color: grey;" (click)="openDialog()">
+                    <span class="material-icons">edit</span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="fill" class="selector" style="width: 100%;">
+                <mat-label>Players</mat-label>
+                <mat-select [formControl]="players" multiple (selectionChange)="playerSelected()">
+                    <mat-option *ngFor="let player of playerList" [value]="player">{{player.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </mat-card>
+
+    <!-- 
+        STEP 2 : ALLOCATE SEATS
+     -->
+    <mat-card *ngIf="allSelected">
+        <div class="row">
+            <div class="col">
+                <h2 col-sm>Player's seating</h2>
+            </div>
+            <div class="col">
+                <button mat-raised-button aria-label="Unseat all players" color="warn" class="icon">
+                    <span class="material-icons">restart_alt</span> Unseat all players
+                </button>
+                <button mat-raised-button aria-label="Shuffle players position" color="primary" class="icon" style="margin-right: 0.5%;">
+                    <span class="material-icons">shuffle</span> Random seating
+                </button>
+            </div>
+        </div>
+        <mat-grid-list cols="3" rowHeight="25vh" class="game-table">
+            <!-- XI -->
+            <mat-grid-tile [colspan]="1" [rowspan]="2">
+                <span class="wind">西</span>
+                <mat-form-field appearance="fill" class="selector">
+                    <mat-label>Player</mat-label>
+                    <mat-select [formControl]="playersSeat" (selectionChange)="playerSeatSelected()">
+                        <mat-option *ngFor="let player of players.value" [value]="player">{{player.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+            <!-- BEI -->
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <span class="wind">北</span>
+                <mat-form-field appearance="fill" class="selector">
+                    <mat-label>Player</mat-label>
+                    <mat-select [formControl]="playersSeat" (selectionChange)="playerSeatSelected()">
+                        <mat-option *ngFor="let player of players.value" [value]="player">{{player.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+            <!-- DONG -->
+            <mat-grid-tile [colspan]="1" [rowspan]="2">
+                <span class="wind">東</span>
+                <mat-form-field appearance="fill" class="selector">
+                    <mat-label>Player</mat-label>
+                    <mat-select [formControl]="playersSeat" (selectionChange)="playerSeatSelected()">
+                        <mat-option *ngFor="let player of players.value" [value]="player">{{player.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+            <!-- NAN -->
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <span class="wind">南</span>
+                <mat-form-field appearance="fill" class="selector">
+                    <mat-label>Player</mat-label>
+                    <mat-select [formControl]="playersSeat" (selectionChange)="playerSeatSelected()">
+                        <mat-option *ngFor="let player of players.value" [value]="player">{{player.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </mat-card>
+    <button *ngIf="allSelected" mat-raised-button aria-label="Start" color="accent"  class="icon start-btn">
+        <span class="material-icons">play_arrow</span> <b>Start</b>
+    </button>
+</div>

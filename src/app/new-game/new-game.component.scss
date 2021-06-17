@@ -1,0 +1,98 @@
+@import "../../variables.scss";
+
+.wrapper {
+    padding: 1%;
+    animation: fadeIn ease 1.5s;
+    -webkit-animation: fadeIn ease 1.5s;
+    -moz-animation: fadeIn ease 1.5s;
+    -o-animation: fadeIn ease 1.5s;
+    -ms-animation: fadeIn ease 1.5s;
+
+    @keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+      
+    @-moz-keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+    
+    @-webkit-keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2vmax;
+        color: $cyan;
+        margin-bottom: 0.5%;
+    }
+
+    h2 {
+        color: $dgreen;
+        display: inline-block;
+    }
+
+    mat-card {
+        margin-top: 1%;
+        animation: fadeIn ease 1s;
+        -webkit-animation: fadeIn ease 1s;
+        -moz-animation: fadeIn ease 1s;
+        -o-animation: fadeIn ease 1s;
+        -ms-animation: fadeIn ease 1s;
+
+        ::ng-deep .mat-grid-tile-content {
+            flex-direction: column;
+        }
+    }
+
+    .selector {
+        font-family: 'Lato', sans-serif;
+
+        ::ng-deep .mat-form-field-flex {
+            background-color: white;
+        }
+    }
+    
+    .icon {
+        float: right;
+    }
+
+    .game-table {
+        margin: 1%;
+        border: 0.2em solid $dgreen;
+
+        .wind {
+            font-size: 3vmax;
+            color: $blue;
+        }
+    }
+
+    .start-btn {
+        margin-top: 0.8%;
+        padding: 10px 16px;
+        font-size: 1vmax;
+        animation: fadeIn ease 1s;
+        -webkit-animation: fadeIn ease 1s;
+        -moz-animation: fadeIn ease 1s;
+        -o-animation: fadeIn ease 1s;
+        -ms-animation: fadeIn ease 1s;
+    }
+
+    @keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+    
+    @-moz-keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+    
+    @-webkit-keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+}
