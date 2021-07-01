@@ -1,11 +1,45 @@
 @import "../../variables.scss";
 
 h2 {
-    color: $dgreen;
-    display: inline-block;
+  color: $dgreen;
+  display: inline-block;
 }
 
 table {
-    width: 100%;
-    margin-top: 1%;
+  width: 100%;
+  margin-top: 1%;
+
+  .mat-column-id,
+  .mat-column-name {
+    width: 28%;
+  }
+
+  .mat-column-lastPlayed {
+    width: 15%;
+  }
+
+  .mat-row:hover .mat-cell {
+    cursor: pointer;
+    font-weight: bold;
+    color: $dgreen;
+  }
+
+  .selected-player {
+    font-weight: bold;
+    background-color: $green;
+  }
+
+  .mat-column-action {
+    width: 10%;
+    text-align: center;
+  }
+
+  .mat-icon-button {
+    color: grey;
+
+    &:active,
+    &:hover {
+      color: $dgreen;
+    }
+  }
 }

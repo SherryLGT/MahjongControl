@@ -3,6 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from 'ngx-cookie-service';
+
+import { WelcomeScreenComponent } from './welcome-screen/welcome-screen.component';
+import { NewGameComponent } from './new-game/new-game.component';
+import { PlayerManagementComponent } from './player-management/player-management.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -15,21 +25,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CookieService } from 'ngx-cookie-service';
-import { WelcomeScreenComponent } from './welcome-screen/welcome-screen.component';
-import { NewGameComponent } from './new-game/new-game.component';
-import { PlayerManagementComponent } from './player-management/player-management.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from "@angular/material/sort";
+import { MatInputModule } from "@angular/material/input";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeScreenComponent,
     NewGameComponent,
-    PlayerManagementComponent
+    PlayerManagementComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     NgbModule,
@@ -50,6 +57,10 @@ import { PlayerManagementComponent } from './player-management/player-management
     MatIconModule,
     MatDialogModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatSnackBarModule,
   ],
   providers: [
     CookieService

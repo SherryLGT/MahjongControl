@@ -11,7 +11,7 @@
                 <h2>Select your players</h2>
             </div>
             <div class="col">
-                <button mat-icon-button aria-label="Edit players list" class="icon" style="color: grey;" (click)="openDialog()">
+                <button mat-icon-button aria-label="Edit players list" class="icon" style="color: grey;" (click)="openEditPlayerDialog()">
                     <span class="material-icons">edit</span>
                 </button>
             </div>
@@ -26,7 +26,7 @@
         </div>
     </mat-card>
 
-    <!-- 
+    <!--
         STEP 2 : ALLOCATE SEATS
      -->
     <mat-card *ngIf="allSelected">

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PlayerManagementComponent } from '../player-management/player-management.component';
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {CookieService} from 'ngx-cookie-service';
+import {MatDialog} from '@angular/material/dialog';
+import {PlayerManagementComponent} from '../player-management/player-management.component';
 
 enum Wind {
   Dong,
@@ -26,33 +26,29 @@ export class NewGameComponent implements OnInit {
 
   constructor(
     private cookieService: CookieService,
-    private dialog: MatDialog) {}
+    private editPlayerDialog: MatDialog) {}
 
   playerCookie!: string;
   playerList: Player[] = [];
-  
+
   ngOnInit(): void {
-    this.cookieService.set('player-list', JSON.stringify({'id': 0, 'name': 'name', 'lastPlayed': new Date()}));
     this.playerCookie = this.cookieService.get('player-list');
 
     if (this.playerCookie) {
       this.playerList = [JSON.parse(this.playerCookie)];
-    // } else {
-      this.openDialog();
+    } else {
+      this.openEditPlayerDialog();
     }
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(PlayerManagementComponent, {
+  openEditPlayerDialog(): void {
+    this.editPlayerDialog.open(PlayerManagementComponent, {
       data: this.playerList,
       width: '60vw',
       maxWidth: '60vw',
       disableClose: true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // result
+    }).afterClosed().subscribe(result => {
+      console.log(result);
     });
   }
 
@@ -74,7 +70,7 @@ export class NewGameComponent implements OnInit {
   //   { "id": -1, "wind": Wind.Xi },
   //   { "id": -1, "wind": Wind.Bei },
   // ];
-  
+
   playerSelected() {
     if (this.players.value.length < 5) {
       this.playersSelected = this.players.value;
