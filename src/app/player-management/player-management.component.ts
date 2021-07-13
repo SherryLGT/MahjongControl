@@ -5,11 +5,13 @@ import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {FormControl} from "@angular/forms";
+import {CookieService} from "ngx-cookie-service";
+
+import {MAX_PLAYER, PLAYER_COOKIE} from "../../constants";
 
 declare const require: any;
 const short = require('short-uuid');
-
-const MAX_PLAYER = 4;
 
 interface Player {
   id: number,
@@ -24,6 +26,9 @@ interface Player {
 })
 export class PlayerManagementComponent implements AfterViewInit {
 
+  // for html access
+  readonly MAX_PLAYER = MAX_PLAYER;
+
   @ViewChild(MatTable) table: MatTable<Player>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -32,10 +37,14 @@ export class PlayerManagementComponent implements AfterViewInit {
   dataSource: MatTableDataSource<Player>;
   selectedPlayerList = new Set<Player>();
 
+  editRowId: number = -1;
+  nameFormControl = new FormControl();
+
   constructor(
     public dialogRef: MatDialogRef<PlayerManagementComponent>,
     private confirmDialog: MatDialog,
     private snackBar: MatSnackBar,
+    private cookieService: CookieService,
     @Inject(MAT_DIALOG_DATA) public playerList: Player[]) {
 
     this.dataSource = new MatTableDataSource(this.playerList);
@@ -51,6 +60,21 @@ export class PlayerManagementComponent implements AfterViewInit {
     this.dialogRef.close(Array.from(this.selectedPlayerList));
   }
 
+  selectedPlayer() {
+    if (this.editRowId !== -1 ) {
+      this.confirmDialog.open(ConfirmationDialogComponent, {
+        data: {
+          title: 'Unsaved data',
+          message: 'Are you sure you want to leave the dialog?',
+          cancel: true,
+          confirm: 'Yes'
+        }
+      }).afterClosed().subscribe(result => {
+        if (result) { this.closeDialog(); }
+      })
+    } else { this.closeDialog(); }
+  }
+
   formatDate(data: string) {
     const date = new Date(Date.parse(data));
     return (date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear() + " " +
@@ -59,6 +83,7 @@ export class PlayerManagementComponent implements AfterViewInit {
 
   // quick fix for rendering table
   renderTableData() {
+    this.playerList = this.dataSource.data;
     this.dataSource.data = this.dataSource.data;
   }
 
@@ -74,7 +99,7 @@ export class PlayerManagementComponent implements AfterViewInit {
   addPlayer() {
     const player: Player = {
       id: short.generate(),
-      name: "player-" + this.dataSource.data.length,
+      name: "New Player",
       lastPlayed: new Date(),
     };
     this.dataSource.data.push(player as Player);
@@ -82,11 +107,32 @@ export class PlayerManagementComponent implements AfterViewInit {
     return player;
   }
 
-  editPlayer(index) {
-
+  editPlayer(e, player, index) {
+    e.stopPropagation();
+    this.editRowId = index;
+    this.nameFormControl.setValue(player.name);
   }
 
-  deletePlayer(player, index) {
+  savePlayer(e, player, index) {
+    e.stopPropagation();
+    if (this.nameFormControl.value && this.nameFormControl.value !== '') {
+      this.dataSource.data[index].name = this.nameFormControl.value;
+      this.renderTableData();
+
+      this.cookieService.set(PLAYER_COOKIE, JSON.stringify(this.playerList));
+      this.editRowId = -1;
+      this.snackBar.open('Saved.', 'Close', {
+        duration: 1000
+      });
+    } else {
+      this.snackBar.open('This is not No Game No Life. Name cannot be blank.', 'Close', {
+        duration: 2000
+      });
+    }
+  }
+
+  deletePlayer(e, player, index) {
+    e.stopPropagation();
     this.confirmDialog.open(ConfirmationDialogComponent, {
       data: {
         title: 'Delete player',

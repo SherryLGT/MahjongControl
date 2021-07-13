@@ -1,9 +1,16 @@
 <h2>Player Management</h2>
 
-<button mat-raised-button aria-label="Add Player" class="icon" color="primary" style="float: right;"  (click)="closeDialog();">
+<button mat-icon-button aria-label="Close Dialog" style="float: right;" (click)="closeDialog();">
+  <mat-icon>close</mat-icon>
+</button>
+<button mat-raised-button aria-label="Select Player"
+        id="select-player-btn" class="icon" color="primary"
+        (click)="selectedPlayer();" style="float: right; margin: 0 0.5%;"
+        [disabled]="this.selectedPlayerList.size !== MAX_PLAYER">
   <span class="material-icons">check</span> Select Players
 </button>
-<button mat-raised-button aria-label="Add Player" class="icon" style="float: right; margin-right: 0.5%;" (click)="addPlayer();">
+<button mat-raised-button aria-label="Add Player" class="icon"
+        style="float: right;" (click)="addPlayer();">
   <span class="material-icons">add_circle_outline</span> Add Player
 </button>
 
@@ -18,7 +25,16 @@
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-    <td mat-cell *matCellDef="let player"> {{player.name}} </td>
+    <td mat-cell *matCellDef="let player; let i = index">
+      <div *ngIf="i === editRowId">
+        <mat-form-field appearance="standard">
+          <mat-label>Player name</mat-label>
+          <input matInput [formControl]="nameFormControl"
+                 (click)="$event.stopPropagation()" autofocus required>
+        </mat-form-field>
+      </div>
+      <span *ngIf="i !== editRowId">{{ player.name }}</span>
+    </td>
   </ng-container>
 
   <!-- Last Played Column -->
@@ -31,16 +47,22 @@
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let player; let i = index;">
-      <button mat-icon-button aria-label="Edit">
+      <button mat-icon-button aria-label="Edit"
+              (click)="editPlayer($event, player, i)" [hidden]="i === editRowId">
         <mat-icon>edit</mat-icon>
       </button>
-      <button *ngIf="dataSource.data.length > 4" mat-icon-button aria-label="Delete" (click)="deletePlayer(player, i)">
+      <button mat-icon-button aria-label="Save"
+              (click)="savePlayer($event, player, i)" [hidden]="i !== editRowId">
+        <mat-icon>save</mat-icon>
+      </button>
+      <button *ngIf="dataSource.data.length > 4" mat-icon-button aria-label="Delete"
+              (click)="deletePlayer($event, player, i)">
         <mat-icon>delete</mat-icon>
       </button>
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"
       [class.selected-player]="selectedPlayerList.has(row)"
       (click)="selectPlayer(row);"></tr>

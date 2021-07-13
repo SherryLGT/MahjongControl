@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {CookieService} from 'ngx-cookie-service';
 import {MatDialog} from '@angular/material/dialog';
 import {PlayerManagementComponent} from '../player-management/player-management.component';
+import {CookieService} from "ngx-cookie-service";
+import {PLAYER_COOKIE} from "../../constants";
 
 enum Wind {
   Dong,
@@ -28,14 +29,13 @@ export class NewGameComponent implements OnInit {
     private cookieService: CookieService,
     private editPlayerDialog: MatDialog) {}
 
-  playerCookie!: string;
   playerList: Player[] = [];
 
   ngOnInit(): void {
-    this.playerCookie = this.cookieService.get('player-list');
+    const playerCookie = this.cookieService.get(PLAYER_COOKIE);
 
-    if (this.playerCookie) {
-      this.playerList = [JSON.parse(this.playerCookie)];
+    if (playerCookie) {
+      this.playerList = JSON.parse(playerCookie);
     } else {
       this.openEditPlayerDialog();
     }
