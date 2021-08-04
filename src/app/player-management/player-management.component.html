@@ -1,21 +1,22 @@
-<h2>Player Management</h2>
+<div class="header">
+  <h2>Player Management</h2>
 
-<button mat-icon-button aria-label="Close Dialog" style="float: right;" (click)="closeDialog();">
-  <mat-icon>close</mat-icon>
-</button>
-<button mat-raised-button aria-label="Select Player"
-        id="select-player-btn" class="icon" color="primary"
-        (click)="selectedPlayer();" style="float: right; margin: 0 0.5%;"
-        [disabled]="this.selectedPlayerList.size !== MAX_PLAYER">
-  <span class="material-icons">check</span> Select Players
-</button>
-<button mat-raised-button aria-label="Add Player" class="icon"
-        style="float: right;" (click)="addPlayer();">
-  <span class="material-icons">add_circle_outline</span> Add Player
-</button>
+  <div>
+    <button mat-raised-button aria-label="Add Player" class="icon" (click)="addPlayer();">
+      <span class="material-icons">add_circle_outline</span> Add Player
+    </button>
+    <button mat-raised-button aria-label="Select Player"
+            class="icon" color="primary" (click)="selectedPlayers();"
+            [disabled]="this.playerSelectedList.size !== MAX_PLAYER">
+      <span class="material-icons">check</span> Select Players
+    </button>
+    <button mat-icon-button aria-label="Close Dialog" (click)="closeDialog();">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-
   <!-- Id Column -->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
@@ -63,8 +64,9 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-      [class.selected-player]="selectedPlayerList.has(row)"
+  <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index;"
+      id="player-row-{{i}}"
+      [class.selected-player]="playerSelectedList.has(row)"
       (click)="selectPlayer(row);"></tr>
 </table>
 

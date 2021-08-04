@@ -1,5 +1,10 @@
 @import "../../variables.scss";
 
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
 h2 {
   color: $dgreen;
   display: inline-block;
@@ -9,14 +14,14 @@ table {
   width: 100%;
   margin-top: 1%;
 
-  .mat-column-id,
-  .mat-column-name {
-    width: 28%;
-  }
-
-  .mat-column-lastPlayed {
-    width: 15%;
-  }
+  //.mat-column-id,
+  //.mat-column-name {
+  //  width: 28%;
+  //}
+  //
+  //.mat-column-lastPlayed {
+  //  width: 15%;
+  //}
 
   .mat-row:hover .mat-cell {
     cursor: pointer;
@@ -30,7 +35,7 @@ table {
   }
 
   .mat-column-action {
-    width: 10%;
+    //width: 10%;
     text-align: center;
   }
 

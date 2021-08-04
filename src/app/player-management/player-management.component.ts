@@ -8,16 +8,11 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormControl} from "@angular/forms";
 import {CookieService} from "ngx-cookie-service";
 
+import {PLAYER} from "../../interface";
 import {MAX_PLAYER, PLAYER_COOKIE} from "../../constants";
 
 declare const require: any;
 const short = require('short-uuid');
-
-interface Player {
-  id: number,
-  name: string,
-  lastPlayed: Date
-}
 
 @Component({
   selector: 'player-management',
@@ -29,13 +24,15 @@ export class PlayerManagementComponent implements AfterViewInit {
   // for html access
   readonly MAX_PLAYER = MAX_PLAYER;
 
-  @ViewChild(MatTable) table: MatTable<Player>;
+  @ViewChild(MatTable) table: MatTable<PLAYER>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   displayedColumns = ['id', 'name', 'lastPlayed', 'action'];
-  dataSource: MatTableDataSource<Player>;
-  selectedPlayerList = new Set<Player>();
+  dataSource: MatTableDataSource<PLAYER>;
+
+  playerList: PLAYER[] = [];
+  playerSelectedList = new Set<PLAYER>();
 
   editRowId: number = -1;
   nameFormControl = new FormControl();
@@ -45,9 +42,14 @@ export class PlayerManagementComponent implements AfterViewInit {
     private confirmDialog: MatDialog,
     private snackBar: MatSnackBar,
     private cookieService: CookieService,
-    @Inject(MAT_DIALOG_DATA) public playerList: Player[]) {
+    @Inject(MAT_DIALOG_DATA) public playersSelected: PLAYER[]) {
 
+    const playerCookie = this.cookieService.get(PLAYER_COOKIE);
+    if (playerCookie) {
+      this.playerList = JSON.parse(playerCookie);
+    }
     this.dataSource = new MatTableDataSource(this.playerList);
+
     this.initPlayerList();
   }
 
@@ -57,10 +59,10 @@ export class PlayerManagementComponent implements AfterViewInit {
   }
 
   closeDialog() {
-    this.dialogRef.close(Array.from(this.selectedPlayerList));
+    this.dialogRef.close(Array.from(this.playerSelectedList));
   }
 
-  selectedPlayer() {
+  selectedPlayers() {
     if (this.editRowId !== -1 ) {
       this.confirmDialog.open(ConfirmationDialogComponent, {
         data: {
@@ -85,26 +87,42 @@ export class PlayerManagementComponent implements AfterViewInit {
   renderTableData() {
     this.playerList = this.dataSource.data;
     this.dataSource.data = this.dataSource.data;
+
+    this.cookieService.set(PLAYER_COOKIE, JSON.stringify(this.playerList));
   }
 
-  // new start
   initPlayerList() {
+    // new start
     if (this.dataSource.data.length < MAX_PLAYER) {
       while(this.dataSource.data.length < MAX_PLAYER) {
         this.addPlayer();
       }
     }
+
+    // dropdown list selection
+    setTimeout(() => {
+      if (this.playersSelected) {
+        this.playersSelected.forEach((player) => {
+          this.playerList.map((p, i) => {
+            if (JSON.stringify(p) === JSON.stringify(player)) {
+              document.getElementById('player-row-' + i).click();
+            }
+          });
+        });
+      }
+    });
+
+    this.renderTableData();
   }
 
   addPlayer() {
-    const player: Player = {
+    const player: PLAYER = {
       id: short.generate(),
-      name: "New Player",
+      name: "New player " + (this.playerList.length+1),
       lastPlayed: new Date(),
     };
-    this.dataSource.data.push(player as Player);
+    this.dataSource.data.push(player as PLAYER);
     if (this.table) { this.renderTableData(); }
-    return player;
   }
 
   editPlayer(e, player, index) {
@@ -119,7 +137,6 @@ export class PlayerManagementComponent implements AfterViewInit {
       this.dataSource.data[index].name = this.nameFormControl.value;
       this.renderTableData();
 
-      this.cookieService.set(PLAYER_COOKIE, JSON.stringify(this.playerList));
       this.editRowId = -1;
       this.snackBar.open('Saved.', 'Close', {
         duration: 1000
@@ -142,7 +159,7 @@ export class PlayerManagementComponent implements AfterViewInit {
       }
     }).afterClosed().subscribe(result => {
       if (result) {
-        this.selectedPlayerList.delete(player);
+        this.playerSelectedList.delete(player);
         this.dataSource.data.splice(index, 1);
         this.renderTableData();
       }
@@ -150,15 +167,15 @@ export class PlayerManagementComponent implements AfterViewInit {
   }
 
   selectPlayer(player) {
-    if (this.selectedPlayerList.size < MAX_PLAYER) {
-      this.selectedPlayerList.has(player) ? this.selectedPlayerList.delete(player) : this.selectedPlayerList.add(player);
+    if (this.playerSelectedList.size < MAX_PLAYER) {
+      this.playerSelectedList.has(player) ? this.playerSelectedList.delete(player) : this.playerSelectedList.add(player);
     } else {
-      if (!this.selectedPlayerList.has(player)) {
+      if (!this.playerSelectedList.has(player)) {
         this.snackBar.open('Max 4 player. Deselect a player first to change selection.', 'Close', {
           duration: 2000
         });
       } else {
-        this.selectedPlayerList.delete(player);
+        this.playerSelectedList.delete(player);
       }
     }
   }
