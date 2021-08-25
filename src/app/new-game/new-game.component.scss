@@ -1,102 +1,117 @@
 @import "../../variables.scss";
 
 .wrapper {
-    padding: 1%;
-    animation: fadeIn ease 1.5s;
-    -webkit-animation: fadeIn ease 1.5s;
-    -moz-animation: fadeIn ease 1.5s;
-    -o-animation: fadeIn ease 1.5s;
-    -ms-animation: fadeIn ease 1.5s;
+  padding: 1%;
+  animation: fadeIn ease 1.5s;
+  -webkit-animation: fadeIn ease 1.5s;
+  -moz-animation: fadeIn ease 1.5s;
+  -o-animation: fadeIn ease 1.5s;
+  -ms-animation: fadeIn ease 1.5s;
 
-    @keyframes fadeIn {
-        0% {opacity:0;}
-        100% {opacity:1;}
+  @keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+
+  @-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+
+  @-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2vmax;
+    color: $cyan;
+    margin-bottom: 0.5%;
+  }
+
+  h2 {
+    color: $dgreen;
+    display: inline-block;
+  }
+
+  mat-card {
+    margin-top: 1%;
+    animation: fadeIn ease 1s;
+    -webkit-animation: fadeIn ease 1s;
+    -moz-animation: fadeIn ease 1s;
+    -o-animation: fadeIn ease 1s;
+    -ms-animation: fadeIn ease 1s;
+
+    ::ng-deep .mat-grid-tile-content {
+      flex-direction: column;
+    }
+  }
+
+  .selector {
+    font-family: 'Lato', sans-serif;
+
+    ::ng-deep .mat-form-field-flex {
+      background-color: white;
+    }
+  }
+
+  .icon {
+    float: right;
+  }
+
+  .game-table {
+    margin: 1%;
+    border: 0.2em solid $dgreen;
+
+    mat-form-field {
+      height: 73px;
     }
 
-    @-moz-keyframes fadeIn {
-        0% {opacity:0;}
-        100% {opacity:1;}
+    ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+      padding: 0;
     }
 
-    @-webkit-keyframes fadeIn {
-        0% {opacity:0;}
-        100% {opacity:1;}
+    .remove-player-btn {
+      padding-top: 15%;
     }
 
-    h1 {
-        font-family: 'Playfair Display', serif;
-        font-size: 2vmax;
-        color: $cyan;
-        margin-bottom: 0.5%;
+    .dealer-btn {
+      font-size: 3vmax;
+      color: $blue;
+
+      &:active,
+      &:hover {
+        cursor: pointer;
+        //font-weight: bold;
+        //color: red;
+      }
     }
+  }
 
-    h2 {
-        color: $dgreen;
-        display: inline-block;
-    }
+  .start-btn {
+    position: absolute;
+    bottom: 1%;
+    right: 1%;
+    animation: fadeIn ease 1s;
+    -webkit-animation: fadeIn ease 1s;
+    -moz-animation: fadeIn ease 1s;
+    -o-animation: fadeIn ease 1s;
+    -ms-animation: fadeIn ease 1s;
+  }
 
-    mat-card {
-        margin-top: 1%;
-        animation: fadeIn ease 1s;
-        -webkit-animation: fadeIn ease 1s;
-        -moz-animation: fadeIn ease 1s;
-        -o-animation: fadeIn ease 1s;
-        -ms-animation: fadeIn ease 1s;
+  @keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
 
-        ::ng-deep .mat-grid-tile-content {
-            flex-direction: column;
-        }
-    }
+  @-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
 
-    .selector {
-        font-family: 'Lato', sans-serif;
-
-        ::ng-deep .mat-form-field-flex {
-            background-color: white;
-        }
-    }
-
-    .icon {
-        float: right;
-    }
-
-    .game-table {
-        margin: 1%;
-        border: 0.2em solid $dgreen;
-
-        .dealer-btn {
-            font-size: 3vmax;
-            color: $blue;
-
-          &:hover {
-            cursor: pointer;
-          }
-        }
-    }
-
-    .start-btn {
-      position: absolute;
-      bottom: 1%;
-      right: 1%;
-      animation: fadeIn ease 1s;
-      -webkit-animation: fadeIn ease 1s;
-      -moz-animation: fadeIn ease 1s;
-      -o-animation: fadeIn ease 1s;
-      -ms-animation: fadeIn ease 1s;
-    }
-
-    @keyframes fadeIn {
-        0% {opacity:0;}
-        100% {opacity:1;}
-    }
-
-    @-moz-keyframes fadeIn {
-        0% {opacity:0;}
-        100% {opacity:1;}
-    }
-
-    @-webkit-keyframes fadeIn {
-        0% {opacity:0;}
-        100% {opacity:1;}
-    }
+  @-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
 }

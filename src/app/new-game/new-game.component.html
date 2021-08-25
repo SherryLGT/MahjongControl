@@ -35,7 +35,7 @@
                 <h2 col-sm>Player's seating</h2>
             </div>
             <div class="col">
-                <button mat-raised-button aria-label="Unseat all players" color="warn" class="icon">
+                <button mat-raised-button aria-label="Unseat all players" color="warn" class="icon" (click)="this.resetSeat();">
                     <span class="material-icons">restart_alt</span> Unseat all players
                 </button>
             </div>
@@ -45,35 +45,47 @@
             <mat-grid-tile [colspan]="1" [rowspan]="3">
               <span class="dealer-btn">東</span>
               <mat-form-field appearance="fill" class="selector">
-                  <mat-label>Player</mat-label>
-                  <mat-select [formControl]="playerSeatL" (selectionChange)="playerSeatSelected()">
-                      <mat-option *ngFor="let player of playerAltList" [value]="player">{{player.name}}</mat-option>
-                  </mat-select>
+                <mat-label>Player</mat-label>
+                <mat-select [formControl]="playerSeatL" (selectionChange)="playerSeatSelected($event.value, 'LEFT')">
+                    <mat-option *ngFor="let player of playerSeatListL" [value]="player">{{player.name}}</mat-option>
+                </mat-select>
+                <button *ngIf="this.playerSeatL.value" (click)="removePlayerSeat(this.playerSeatL.value, 'LEFT');"
+                        mat-icon-button matSuffix aria-label="Remove player" class="remove-player-btn">
+                  <mat-icon>close</mat-icon>
+                </button>
               </mat-form-field>
             </mat-grid-tile>
             <!-- TOP -->
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <span class="dealer-btn">東</span>
               <mat-form-field appearance="fill" class="selector">
-                  <mat-label>Player</mat-label>
-                  <mat-select [formControl]="playerSeatT" (selectionChange)="playerSeatSelected()">
-                      <mat-option *ngFor="let player of playerAltList" [value]="player">{{player.name}}</mat-option>
-                  </mat-select>
+                <mat-label>Player</mat-label>
+                <mat-select [formControl]="playerSeatT" (selectionChange)="playerSeatSelected($event.value, 'TOP')">
+                    <mat-option *ngFor="let player of playerSeatListT" [value]="player">{{player.name}}</mat-option>
+                </mat-select>
+                <button *ngIf="this.playerSeatT.value" (click)="removePlayerSeat(this.playerSeatT.value, 'TOP');"
+                        mat-icon-button matSuffix aria-label="Remove player" class="remove-player-btn">
+                  <mat-icon>close</mat-icon>
+                </button>
               </mat-form-field>
             </mat-grid-tile>
             <!-- RIGHT -->
             <mat-grid-tile [colspan]="1" [rowspan]="3">
               <span class="dealer-btn">東</span>
               <mat-form-field appearance="fill" class="selector">
-                  <mat-label>Player</mat-label>
-                  <mat-select [formControl]="playerSeatR" (selectionChange)="playerSeatSelected()">
-                      <mat-option *ngFor="let player of playerAltList" [value]="player">{{player.name}}</mat-option>
-                  </mat-select>
+                <mat-label>Player</mat-label>
+                <mat-select [formControl]="playerSeatR" (selectionChange)="playerSeatSelected($event.value,'RIGHT')">
+                    <mat-option *ngFor="let player of playerSeatListR" [value]="player">{{player.name}}</mat-option>
+                </mat-select>
+                <button *ngIf="this.playerSeatR.value" (click)="removePlayerSeat(this.playerSeatR.value, 'RIGHT');"
+                        mat-icon-button matSuffix aria-label="Remove player" class="remove-player-btn">
+                  <mat-icon>close</mat-icon>
+                </button>
               </mat-form-field>
             </mat-grid-tile>
             <!-- CENTER -->
             <mat-grid-tile [colspan]="1" [rowspan]="1">
-              <button mat-raised-button aria-label="Shuffle players position" color="primary" class="icon">
+              <button mat-raised-button aria-label="Shuffle players position" color="primary" class="icon" (click)="randomSeat()">
                 <span class="material-icons">shuffle</span> Random seat / oya
               </button>
             </mat-grid-tile>
@@ -82,9 +94,13 @@
               <span class="dealer-btn">東</span>
               <mat-form-field appearance="fill" class="selector">
                 <mat-label>Player</mat-label>
-                <mat-select [formControl]="playerSeatB" (selectionChange)="playerSeatSelected()">
-                  <mat-option *ngFor="let player of playerAltList" [value]="player">{{player.name}}</mat-option>
+                <mat-select [formControl]="playerSeatB" (selectionChange)="playerSeatSelected($event.value, 'BOTTOM')">
+                  <mat-option *ngFor="let player of playerSeatListB" [value]="player">{{player.name}}</mat-option>
                 </mat-select>
+                <button *ngIf="this.playerSeatB.value" (click)="removePlayerSeat(this.playerSeatB.value, 'BOTTOM');"
+                        mat-icon-button matSuffix aria-label="Remove player" class="remove-player-btn">
+                  <mat-icon>close</mat-icon>
+                </button>
               </mat-form-field>
             </mat-grid-tile>
         </mat-grid-list>
