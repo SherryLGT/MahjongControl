@@ -2,9 +2,9 @@
   <mat-card class="card" [class.mat-elevation-z8]="true">
     <div class="container h-100">
       <div class="row h-100">
-        <div class="col left">
+        <div class="col-lg-5 left">
         </div>
-        <div class="col-7 right">
+        <div class="col-lg-7 right">
           <login-form *ngIf="!isRegister"></login-form>
           <register-form *ngIf="isRegister" [isRegister]="isRegister" (closeRegister)="toggleRegister()"></register-form>
 
