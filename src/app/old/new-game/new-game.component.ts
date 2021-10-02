@@ -6,8 +6,8 @@ import {CookieService} from "ngx-cookie-service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 import _ from "lodash";
-import {PLAYER} from "../../interface";
-import {STATE, PLAYER_COOKIE} from "../../constants";
+import {PLAYER} from "../../../interface";
+import {STATE, PLAYER_COOKIE} from "../../../constants";
 
 @Component({
   selector: 'new-game-component',

@@ -3,13 +3,13 @@ import {MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog
 import {MatTable, MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
-import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
+import {ConfirmationDialogComponent} from "../../common/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormControl} from "@angular/forms";
 import {CookieService} from "ngx-cookie-service";
 
-import {PLAYER} from "../../interface";
-import {MAX_PLAYER, PLAYER_COOKIE} from "../../constants";
+import {PLAYER} from "../../../interface";
+import {MAX_PLAYER, PLAYER_COOKIE} from "../../../constants";
 
 declare const require: any;
 const short = require('short-uuid');

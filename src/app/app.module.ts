@@ -8,10 +8,10 @@ import {AppComponent} from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CookieService} from 'ngx-cookie-service';
 
-import {WelcomeScreenComponent} from './welcome-screen/welcome-screen.component';
-import {NewGameComponent} from './new-game/new-game.component';
-import {PlayerManagementComponent} from './player-management/player-management.component';
-import {ConfirmationDialogComponent} from './confirmation-dialog/confirmation-dialog.component';
+import {WelcomeScreenComponent} from './old/welcome-screen/welcome-screen.component';
+import {NewGameComponent} from './old/new-game/new-game.component';
+import {PlayerManagementComponent} from './old/player-management/player-management.component';
+import {ConfirmationDialogComponent} from './common/confirmation-dialog/confirmation-dialog.component';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatRippleModule} from '@angular/material/core';
@@ -30,6 +30,9 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatInputModule} from "@angular/material/input";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {LoginPageComponent} from './login/login-page/login-page.component';
+import { LoginFormComponent } from './login/login-form/login-form.component';
+import { RegisterFormComponent } from './login/register-form/register-form.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
     NewGameComponent,
     PlayerManagementComponent,
     ConfirmationDialogComponent,
+    LoginPageComponent,
+    LoginFormComponent,
+    RegisterFormComponent,
   ],
   imports: [
     NgbModule,

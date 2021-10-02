@@ -1,0 +1,27 @@
+@import "../../../variables";
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-family: "Dosis", sans-serif;
+  font-size: 3vmax;
+  text-align: center;
+}
+
+.form {
+  margin-top: 70px;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  mat-form-field, .submit-button {
+    width: 70%;
+  }
+
+  .submit-button {
+    padding: 5px;
+  }
+}

@@ -1,0 +1,27 @@
+<button mat-icon-button aria-label="Cancel Registration" class="close" (click)="toggleRegister()">
+  <mat-icon>close</mat-icon>
+</button>
+
+<h1>Register</h1>
+
+<form class="form center">
+  <mat-form-field appearance="outline">
+    <mat-label>Enter your username</mat-label>
+    <input matInput placeholder="Placeholder" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Enter your email</mat-label>
+    <input matInput placeholder="email@example.com" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Enter your password</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'" required>
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" class="submit-button">Submit</button>
+</form>
