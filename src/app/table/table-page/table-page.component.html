@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <div class="row horizontal">
+    <div class="col">
+      <player-zone id="top-player" [PLAYER_POS]="'TOP'"></player-zone>
+    </div>
+  </div>
+  <div class="row vertical">
+    <div class="col-4 col-sm-2">
+      <player-zone id="left-player" [PLAYER_POS]="'LEFT'"></player-zone>
+    </div>
+    <div class="col-4 col-sm-8 center" id="center-panel">
+      CENTER
+    </div>
+    <div class="col-4 col-sm-2">
+      <player-zone id="right-player" [PLAYER_POS]="'RIGHT'"></player-zone>
+    </div>
+  </div>
+  <div class="row horizontal">
+    <div class="col">
+      <player-zone id="bottom-player" [PLAYER_POS]="'BOTTOM'"></player-zone>
+    </div>
+  </div>
+</div>

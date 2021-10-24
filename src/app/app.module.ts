@@ -33,6 +33,8 @@ import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { LoginPageComponent } from './login/login-page/login-page.component';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { RegisterFormComponent } from './login/register-form/register-form.component';
+import { TablePageComponent } from './table/table-page/table-page.component';
+import { PlayerZoneComponent } from './table/player-zone/player-zone/player-zone.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { RegisterFormComponent } from './login/register-form/register-form.compo
     LoginPageComponent,
     LoginFormComponent,
     RegisterFormComponent,
+    TablePageComponent,
+    PlayerZoneComponent,
   ],
   imports: [
     NgbModule,

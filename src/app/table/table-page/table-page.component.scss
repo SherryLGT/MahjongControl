@@ -1,0 +1,52 @@
+@import "../../../variables";
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vertical {
+  height: calc(100% - (20% * 2));
+  background: $blue;
+}
+
+.horizontal {
+  height: 20%;
+  background: $green;
+}
+
+.wrapper {
+  height: 100%;
+}
+
+#center-panel {
+  background: $white;
+}
+
+#top-player {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+#bottom-player {
+}
+
+#left-player {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+#right-player {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
